@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         sensorManager.registerListener(rl, rotationVector, SensorManager.SENSOR_DELAY_NORMAL);
         SensorEventListener al = new SensorEventListeners(accel, graph);
         sensorManager.registerListener(al, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-
+//        reset button
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +91,7 @@ class SensorEventListeners implements SensorEventListener {
     LineGraphView Graph;
     float a, b, c, d;
     float max1 = 0, max2 = 0, max3 = 0, max4 = 0;
-
+    //    Tell by function signatures
     public SensorEventListeners(TextView outputView, LineGraphView grp) {
         output = outputView;
         Graph = grp;
@@ -105,20 +105,23 @@ class SensorEventListeners implements SensorEventListener {
     }
 
     public void onSensorChanged(SensorEvent se) {
+//        light sensor
         if (se.sensor.getType() == Sensor.TYPE_LIGHT) {
             String LS = String.format("(%.2f)", se.values[0]);
             output.setText("Light Sensor: \n" + LS + "\n");
         }
+//        acel sensor
         if (se.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             String x = String.format("(%.2f, %.2f, %.2f)", se.values[0], se.values[1], se.values[2]);
             Graph.addPoint(se.values);
             a = se.values[0];
             b = se.values[1];
             c = se.values[2];
+//            to find maximum value
             if (max1 < abs(a) && max2 < abs(b) && max3 < abs(c)) {
-                max1 = a;
-                max2 = b;
-                max3 = c;
+                max1 = abs(a);
+                max2 = abs(b);
+                max3 = abs(c);
             } else if (max1 < abs(a)) {
                 max1 = abs(a);
             } else if (max2 < abs(b)) {
@@ -129,15 +132,17 @@ class SensorEventListeners implements SensorEventListener {
             String AS = String.format("(%.2f, %.2f, %.2f)", max1, max2, max3);
             output.setText("Accelerometer: \n" + x + "\nMaximum acceleration:\n" + AS + "\n");
         }
+//        magnet sensor
         if (se.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
             String x = String.format("(%.2f, %.2f, %.2f)", se.values[0], se.values[1], se.values[2]);
             a = se.values[0];
             b = se.values[1];
             c = se.values[2];
+            //            to find maximum value
             if (max1 < abs(a) && max2 < abs(b) && max3 < abs(c)) {
-                max1 = a;
-                max2 = b;
-                max3 = c;
+                max1 = abs(a);
+                max2 = abs(b);
+                max3 = abs(c);
             } else if (max1 < abs(a)) {
                 max1 = abs(a);
             } else if (max2 < abs(b)) {
@@ -148,17 +153,19 @@ class SensorEventListeners implements SensorEventListener {
             String MS = String.format("(%.2f, %.2f, %.2f)", max1, max2, max3);
             output.setText("Magnet Sensor: \n" + x + "\nMaximum value:\n" + MS + "\n");
         }
+//        rotation sensor
         if (se.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
             String x = String.format("(%.2f, %.2f, %.2f, %.2f)", se.values[0], se.values[1], se.values[2], se.values[3]);
             a = se.values[0];
             b = se.values[1];
             c = se.values[2];
             d = se.values[3];
+//            to find maximum value
             if (max1 < abs(a) && max2 < abs(b) && max3 < abs(c) && max4 < abs(d)) {
-                max1 = a;
-                max2 = b;
-                max3 = c;
-                max4 = d;
+                max1 = abs(a);
+                max2 = abs(b);
+                max3 = abs(c);
+                max4 = abs(d);
             } else if (max1 < abs(a)) {
                 max1 = abs(a);
             } else if (max2 < abs(b)) {

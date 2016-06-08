@@ -54,10 +54,9 @@ public class LineGraphView extends View
 										};
 	
 	private Paint graphPaint = new Paint();
-	
-//increased the graph size for a little bit so it fits the screen better
-	private final int WIDTH = 1100;
-	private final int HEIGHT = 750;
+
+	private final int WIDTH = 400;
+	private final int HEIGHT = 400;
 	private final int AXIS_WIDTH = 100;
 	
 	private float xScale, yScale;
